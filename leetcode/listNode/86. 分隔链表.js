@@ -18,4 +18,24 @@
  * @param {number} x
  * @return {ListNode}
  */
-var partition = function (head, x) {};
+var partition = function (head, x) {
+  const maxList = new ListNode(0);
+  const minList = new ListNode(0);
+  let cur = head,
+    min = minList,
+    max = maxList;
+  while (cur) {
+    if (cur.val < x) {
+      min.next = cur;
+      min = min.next;
+    } else {
+      max.next = cur;
+      max = max.next;
+    }
+    cur = cur.next;
+  }
+  // 关键修复：断开 max 链表的尾部引用
+  max.next = null;
+  min.next = maxList.next;
+  return minList.next;
+};

@@ -16,4 +16,16 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteDuplicates = function (head) {};
+var deleteDuplicates = function (head) {
+  if (!head || !head.next) return head;
+  const list = new ListNode(0, head);
+  let dummy = list;
+  while (dummy.next && dummy.next.next) {
+    if (dummy.next.val === dummy.next.next.val) {
+      dummy.next = dummy.next.next;
+    } else {
+      dummy = dummy.next;
+    }
+  }
+  return list.next;
+};
